@@ -48,3 +48,22 @@ IDPEDIDO INT ,
 FECHAFACTURA DATE,
 TOTALFACTURA DECIMAL (10, 2)
 ); 
+
+-- Agregar clave foránea a la tabla Pedidos para referenciar la tabla Clientes
+ALTER TABLE Pedido ADD CONSTRAINT fk_pedido FOREIGN KEY (IDCLIENTE)
+REFERENCES Cliente (IDCLIENTE);
+
+-- Agregar clave foránea a la tabla DetallesPedido para referenciar la tabla Pedidos
+ALTER TABLE DetallesPedido ADD CONSTRAINT fk_detallespedido_pedido
+FOREIGN KEY (IDPEDIDO)
+REFERENCES Pedido (IDPEDIDO);
+
+-- Agregar clave foránea a la tabla DetallesPedido para referenciar la tabla Productos
+ALTER TABLE DetallesPedido ADD CONSTRAINT fk_detallespedido_producto
+FOREIGN KEY (IDPRODUCTO)
+REFERENCES Producto (IDPRODUCTO);
+
+-- Agregar clave foránea a la tabla Facturas para referenciar la tabla Pedidos
+ALTER TABLE Factura ADD CONSTRAINT fk_factura_pedido
+FOREIGN KEY (IDPEDIDO)
+REFERENCES Pedido (IDPEDIDO);
